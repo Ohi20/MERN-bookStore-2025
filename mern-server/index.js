@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // mongodb configuration
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri =
   "mongodb+srv://dbuser:IgoA0HSLg4cSOSd6@cluster0.mpgfb3v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -42,6 +42,35 @@ async function run() {
       const result = await bookCollections.insertOne(data);
       res.send(result);
     });
+
+    // get all books from the database
+    app.get("/all-books", async (req, res) => {
+      const books = bookCollections.find();
+      const result = await books.toArray();
+      res.send(result);
+    });
+
+    // update a book - patch or update
+    app.patch("/update-book/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatebookData = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          ...updatebookData,
+        },
+      };
+
+      //   update
+      const result = await bookCollections.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
