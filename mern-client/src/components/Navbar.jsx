@@ -40,9 +40,13 @@ const Navbar = () => {
   ];
 
   return (
-    <header>
-      <nav>
-        <div>
+    <header className="w-full bg-transparent fixed top-0 left-o right-0 transition-all ease-in duration-300">
+      <nav
+        className={`py-4 lg:px-24 px-4 ${
+          isSticky ? "sticky top-0 left-0 right-0 bg-blue-300" : ""
+        }`}
+      >
+        <div className="flex justify-between items-center text-base gap-8">
           {/* logo */}
           <Link
             to="/"
@@ -89,7 +93,11 @@ const Navbar = () => {
         </div>
 
         {/* nav items for the small devices */}
-        <div className="bg-blue-700 space-y-4 px-4 mt-16 py-7">
+        <div
+          className={`bg-blue-700 space-y-4 px-4 mt-16 py-7 ${
+            isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+          }`}
+        >
           {navItems.map(({ link, path }) => (
             <Link
               key={path}
