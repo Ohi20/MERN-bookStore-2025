@@ -50,6 +50,14 @@ async function run() {
       res.send(result);
     });
 
+    // get single book from the database
+    app.get("/book/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await bookCollections.findOne(filter);
+      res.send(result);
+    });
+
     // update a book - patch or update
     app.patch("/update-book/:id", async (req, res) => {
       const id = req.params.id;

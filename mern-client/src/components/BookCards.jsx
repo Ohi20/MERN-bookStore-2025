@@ -21,7 +21,7 @@ const BookCards = ({ books, headLine }) => {
       </h2>
 
       {/* cards */}
-      <div>
+      <div className="mt-12">
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -47,7 +47,7 @@ const BookCards = ({ books, headLine }) => {
         >
           {books.map((book) => (
             <SwiperSlide key={book._id}>
-              <Link to="/">
+              <Link to={`/book/${book._id}`}>
                 <div className="relative">
                   <img src={book.imageURL} alt="" />
                   <div className="absolute top-3 right-3 bg-blue-600 hover:bg-black p-2 rounded">
