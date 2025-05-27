@@ -5,6 +5,7 @@ import ListedBooks from "./ListedBooks";
 import PromoBanner from "./PromoBanner";
 import OtherBooks from "./OtherBooks";
 import Review from "./Review";
+import MyFooter from "../components/MyFooter";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <PromoBanner />
       <OtherBooks />
       <Review />
+      <MyFooter />
     </div>
   );
 };
