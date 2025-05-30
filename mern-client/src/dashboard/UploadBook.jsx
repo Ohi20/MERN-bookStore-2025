@@ -68,6 +68,7 @@ const UploadBook = () => {
       .then((res) => res.json())
       .then((data) => {
         alert("Book uploaded successfully!!");
+        form.reset();
       });
   };
 
