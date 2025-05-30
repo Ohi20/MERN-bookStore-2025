@@ -58,7 +58,17 @@ const UploadBook = () => {
       bookPdfURL,
     };
 
-    console.log(bookObj);
+    fetch("http://localhost:8000/upload-book", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookObj),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Book uploaded successfully!!");
+      });
   };
 
   return (
