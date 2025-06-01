@@ -11,7 +11,7 @@ import {
 } from "flowbite-react";
 
 const Editbooks = () => {
-  const id = useParams();
+  const { id } = useParams();
 
   const {
     bookTitle,
@@ -71,7 +71,7 @@ const Editbooks = () => {
       bookPdfURL,
     };
 
-    fetch(`http://localhost:8000/update-book/${id}`, {
+    fetch(`http://localhost:8000/book/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const Editbooks = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Book uploaded successfully!!");
+        alert("Book updated successfully!!");
       });
   };
 

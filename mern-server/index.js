@@ -59,9 +59,10 @@ async function run() {
     });
 
     // update a book - patch or update
-    app.patch("/update-book/:id", async (req, res) => {
+    app.patch("/book/:id", async (req, res) => {
       const id = req.params.id;
       const updatebookData = req.body;
+      // const filter = { _id: new ObjectId(id) };
       const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
