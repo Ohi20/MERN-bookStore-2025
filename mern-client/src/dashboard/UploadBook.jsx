@@ -35,7 +35,7 @@ const UploadBook = () => {
 
   const handleValueSelected = (event) => {
     console.log(event.target.value);
-    selectedBookCategory();
+    setSelectedBookCategory(event.target.value);
   };
 
   const handleSubmitBook = (event) => {
