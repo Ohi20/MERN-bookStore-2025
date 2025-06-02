@@ -2,10 +2,11 @@ import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+
 // import { googleLogo } from "../assets/google-logo.svg";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, loginWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("error");
   const [code, setCode] = useState("codeError");
 
@@ -35,6 +36,35 @@ const SignUp = () => {
         setError(errorMessage);
         setCode(errorCode);
         // ..
+      });
+  };
+
+  // Sign up using google account
+
+  const handleRegister = () => {
+    loginWithGoogle()
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        alert("Signed Up Successfully!!");
+        navigate(from, { replace: true });
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+        setCode(errorCode);
+        // The email of the user's account used.
+        // const email = error.customData.email;
+        // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
       });
   };
 
