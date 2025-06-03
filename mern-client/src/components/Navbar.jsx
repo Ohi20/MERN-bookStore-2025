@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 // react icons
 import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
 import { AuthContext } from "../context/AuthProvider";
+import { getAuth, signOut } from "firebase/auth";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [error, setError] = useState("error");
 
   const { user } = useContext(AuthContext);
+  const auth = getAuth();
   // console.log(user);
 
   //   toggle menu
@@ -32,6 +35,17 @@ const Navbar = () => {
       };
     };
   }, []);
+
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        setError(error);
+      });
+  };
 
   //   navItems
 
@@ -80,7 +94,12 @@ const Navbar = () => {
               <div className="flex justify-between items-center gap-3">
                 <div className="text-sky-600">{user.displayName}</div>
                 <div className="bg-red-500 px-3 py-1 rounded-md hover:bg-sky-600">
-                  <button className="text-white font-semibold">Logout</button>
+                  <button
+                    onClick={handleLogOut}
+                    className="text-white font-semibold"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             ) : (
