@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
-  const { createUser, loginWithGoogle } = useContext(AuthContext);
+  const { login, loginWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("error");
   const [code, setCode] = useState("codeError");
 
@@ -19,6 +19,20 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    login(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        alert("Login Successfull!!");
+        navigate(from, { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
   };
 
   // Sign up using google account
@@ -117,7 +131,10 @@ const Login = () => {
                   Login with google
                 </button>
               </div>
-              <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-center font-light text-red-500 ">
+                {error ? "Email or Password is not correct" : ""}
+              </p>
+              <p className="text-sm text-center font-light text-gray-500 ">
                 Don't have an account?{" "}
                 <Link
                   to="/sign-up"

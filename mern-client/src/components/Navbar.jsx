@@ -103,10 +103,12 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <button>
-                {/* <FaBarsStaggered className="w-5 hover:text-blue-700" /> */}
-                Login
-              </button>
+              <Link to="/login">
+                <button>
+                  {/* <FaBarsStaggered className="w-5 hover:text-blue-700" /> */}
+                  Login
+                </button>
+              </Link>
             )}
           </div>
 
