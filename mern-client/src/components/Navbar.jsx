@@ -76,10 +76,19 @@ const Navbar = () => {
 
           {/* btn for large devices */}
           <div className="space-x-12 hidden lg:flex items-center">
-            <button>
-              <FaBarsStaggered className="w-5 hover:text-blue-700" />
-            </button>
-            {user ? user.email : ""}
+            {user ? (
+              <div className="flex justify-between items-center gap-3">
+                <div className="text-sky-600">{user.displayName}</div>
+                <div className="bg-red-500 px-3 py-1 rounded-md hover:bg-sky-600">
+                  <button className="text-white font-semibold">Logout</button>
+                </div>
+              </div>
+            ) : (
+              <button>
+                {/* <FaBarsStaggered className="w-5 hover:text-blue-700" /> */}
+                Login
+              </button>
+            )}
           </div>
 
           {/* menu button for the mobile devices */}
