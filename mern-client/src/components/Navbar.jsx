@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import IMAGES from "../../public/assets/Images";
 
 // react icons
 import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
@@ -64,14 +65,11 @@ const Navbar = () => {
           isSticky ? "sticky top-0 left-0 right-0 bg-blue-300" : ""
         }`}
       >
-        <div className="flex justify-between items-center text-base gap-8">
+        <div className="flex justify-between items-center text-base ">
           {/* logo */}
-          <Link
-            to="/"
-            className="flex text-2xl font-bold text-blue-700 items-center gap-2"
-          >
-            <FaBlog className="inline-block" />
-            Books
+          <Link to="/" className="text-[#810081] text-xl font-bold">
+            <img className="w-12 h-12" src={IMAGES.image1} alt="logo" />
+            Philomath
           </Link>
 
           {/* nav items for large devices */}
@@ -81,7 +79,7 @@ const Navbar = () => {
               <Link
                 key={path}
                 to={path}
-                className="block text-base text-black uppercase cursor-pointer hover:text-blue-700"
+                className="block text-xl bg-[#810081] text-white p-2 font-semibold rounded-md uppercase cursor-pointer hover:bg-[#ce00ce]"
               >
                 {link}
               </Link>
@@ -92,19 +90,24 @@ const Navbar = () => {
           <div className="space-x-12 hidden lg:flex items-center">
             {user ? (
               <div className="flex justify-between items-center gap-3">
-                <div className="text-sky-600">{user.displayName}</div>
-                <div className="bg-red-500 px-3 py-1 rounded-md hover:bg-sky-600">
+                <div className="bg-[#810081] text-white p-2 rounded-md font-semibold">
+                  User Name : {user.displayName}
+                </div>
+                <div className="bg-red-700 px-3 py-1 rounded-md hover:bg-red-500">
                   <button
                     onClick={handleLogOut}
-                    className="text-white font-semibold"
+                    className="text-white font-semibold p-2"
                   >
                     Logout
                   </button>
                 </div>
               </div>
             ) : (
-              <Link to="/login">
-                <button>
+              <Link
+                className="bg-[#810081] p-2 rounded-md hover:bg-[#ce00ce]"
+                to="/login"
+              >
+                <button className="text-white text-xl font-bold">
                   {/* <FaBarsStaggered className="w-5 hover:text-blue-700" /> */}
                   Login
                 </button>
